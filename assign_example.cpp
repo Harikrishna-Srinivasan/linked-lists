@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "singly_linked_list.h"
+#include "singly_linked_list.hpp"
 
 /**
  * @file initialize_example.cpp
