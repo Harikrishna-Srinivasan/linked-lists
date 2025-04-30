@@ -16,15 +16,15 @@
   // Correct
   void example()
   {
-      if (condition) {
+      if (condition)
+      {
           // code
       }
   }
 
-  // Incorrect
+  // Incorrect: Do not use braces on the same line
   void example() {
-      if (condition)
-      {
+      if (condition) {
           // code
       }
   }
