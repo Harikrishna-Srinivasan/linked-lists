@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector> // To use std::vector 
+#include <vector> // To use std::vector
 
 #include "singly_linked_list.hpp"
 
@@ -83,7 +83,7 @@ int main()
 
     // Create two char lists
     singly_linked_list<char> char_list1 = {'a','r','r','a','y'}, char_list2 = {'l','i','s','t'};
-    
+
     // Extend char_list1 with char_list2
     char_list1.extend(char_list2);
     std::cout << "char_list1: " << char_list1 << std::endl; // char_list1: [a, r, r, a, y, l, i, s, t]

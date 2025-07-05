@@ -11,8 +11,8 @@
  * If the value is not found, an exception is thrown.
  *
  * @author Harikrishna Srinivasan
- * @date [Current Date]
- * @version 1.0
+ * @date 05 July 2025
+ * @version 0.9
  */
 
 // Create a custom class

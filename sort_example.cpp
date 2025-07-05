@@ -4,15 +4,15 @@
 
 /**
  * @file sort_example.cpp
- * @brief Demonstrates usage of singly_linked_list sort method.
+ * @brief Demonstrates usage of singly_linked_list's sort method.
  *
  * This program provides examples of sorting singly linked lists with various data types,
  * including integers and custom classes. It showcases the use of the sort method to 
  * perform merge sort on the list.
  *
  * @author Harikrishna Srinivasan
- * @date [Current Date]
- * @version 1.0
+ * @date 05 July 2025
+ * @version 0.9
  */
 
 // Create a custom class

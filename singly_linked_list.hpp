@@ -18,7 +18,7 @@ class singly_linked_list: public linkedlist<A>
     public:
         singly_linked_list();
 
-        singly_linked_list(singly_linked_list<A> &&obj);
+        singly_linked_list(singly_linked_list<A> &&obj) noexcept;
         singly_linked_list(const singly_linked_list<A> &obj);
         singly_linked_list(const std::initializer_list<A> &values);
         
@@ -26,17 +26,13 @@ class singly_linked_list: public linkedlist<A>
         singly_linked_list(const A (&array)[N]);
         singly_linked_list(const std::vector<A> &values);
 
-        // singly_linked_list(singly_linked_list<A> &&obj) noexcept = delete;
-
-        singly_linked_list<A> operator=(singly_linked_list<A> &&obj);
+        singly_linked_list<A> operator=(singly_linked_list<A> &&obj) noexcept;
         singly_linked_list<A> &operator=(const singly_linked_list<A> &obj);
         singly_linked_list<A> &operator=(const std::initializer_list<A> &values);
         
         template <size_t N>
         singly_linked_list<A> &operator=(const A (&array)[N]);
         singly_linked_list<A> &operator=(const std::vector<A> &values);
-
-        // singly_linked_list<A> &operator=(singly_linked_list<A> &&obj) noexcept = delete;
 
         void prepend(const A &value) override;
         void append(const A &value) override;

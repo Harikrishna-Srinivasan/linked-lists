@@ -4,7 +4,7 @@
 
 /**
  * @file prepend_example.cpp
- * @brief Demonstrates the usage of the `prepend` method in a singly linked list.
+ * @brief Demonstrates the usage of the `prepend` method in singly_linked_list.
  * 
  * This program provides examples of using the `prepend` method to add elements 
  * to the beginning of a singly linked list. It includes examples with strings 
@@ -13,8 +13,8 @@
  * @sa insert_example.cpp for examples of other list insertion methods.
  * 
  * @author Harikrishna Srinivasan
- * @date [Current Date]
- * @version 1.0
+ * @date 05 July 2025
+ * @version 0.9
  */
 
 int main()

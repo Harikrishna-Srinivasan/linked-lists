@@ -14,8 +14,8 @@
  * negative indexing and modifying elements.
  * 
  * @author Harikrishna Srinivasan
- * @date [Current Date]
- * @version 1.0
+ * @date 05 July 2025
+ * @version 0.9
  */
 
 // Create a custom class

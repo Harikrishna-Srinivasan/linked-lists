@@ -9,8 +9,8 @@
  * This program provides examples of using the `insert` method in singly linked list.
  *
  * @author Harikrishna Srinivasan
- * @date [Current Date]
- * @version 1.0
+ * @date 05 July 2025
+ * @version 0.9
  */
 
 int main()

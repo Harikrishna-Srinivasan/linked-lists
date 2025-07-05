@@ -3,6 +3,15 @@
 
 #include "singly_linked_list.hpp"
 
+/**
+ * @file show_example.cpp
+ * @brief Demonstrates usage of show method and << operator in `singly_linked_list`.
+ *
+ * @author Harikrishna Srinivasan
+ * @date 05 July 2025
+ * @version 0.9
+ */
+
 int main()
 {
     singly_linked_list<int> list1 = {1,2,3,4,5}, list2 = {77,88,99,110};

@@ -4,18 +4,18 @@
 
 /**
  * @file append_example.cpp
- * @brief Demonstrates the usage of the `append` method in a singly linked list.
+ * @brief Demonstrates the usage of the `append` method in singly_linked_list.
  * 
  * This program provides examples of appending values to a singly linked list.
- * It highlights how new elements can be added to the end of the list for both 
+ * It highlights how new elements can be added to the end of the list for both
  * strings and integers.
  *
  * @sa insert_example.cpp for inserting at specific positions in the list.
  * @sa extend_example.cpp for appending multiple elements using `extend`.
  * 
  * @author Harikrishna Srinivasan
- * @date [Current Date]
- * @version 1.0
+ * @date 05 July 2025
+ * @version 0.9
  */
 
 int main()

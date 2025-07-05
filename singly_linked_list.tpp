@@ -12,29 +12,30 @@ singly_linked_list<A>::singly_linked_list(): linkedlist<A>::linkedlist(),
  * @brief Constructs a copy of a singly linked list.
  *
  * This constructor initializes a new `singly_linked_list` as a copy of the provided
- * `singly_linked_list` object. It copies the length and reference count from the 
+ * `singly_linked_list` object. It copies the length and reference count from the
  * original list and increments the reference count to manage shared ownership.
  *
  * @param obj The `singly_linked_list` object to copy from.
  */
 template <typename A>
-singly_linked_list<A>::singly_linked_list(singly_linked_list<A> &&obj): linkedlist<A>::linkedlist()
+singly_linked_list<A>::singly_linked_list(singly_linked_list<A> &&obj) noexcept: linkedlist<A>::linkedlist()
 {
-    typename linkedlist<A>::node *ptr = *linkedlist<A>::gethead(obj);
-    while (ptr != nullptr)
-    {
-        this->append(ptr->value);
-        ptr = ptr->next;
-    }
+    this->head = obj.head;
+    this->tail = obj.tail;
+    this->length = obj.length;
+    this->ref_count = obj.ref_count;
 
-    *this->length = *obj.length;
+    obj.head = new typename linkedlist<A>::node*(nullptr);
+    obj.tail = new typename linkedlist<A>::node*(nullptr);
+    obj.length = new size_t(0);
+    obj.ref_count = new size_t(1);
 }
 
 /**
  * @brief Constructs a copy of a singly linked list.
  *
  * This constructor initializes a new `singly_linked_list` as a copy of the provided
- * `singly_linked_list` object. It copies the length and reference count from the 
+ * `singly_linked_list` object. It copies the length and reference count from the
  * original list and increments the reference count to manage shared ownership.
  *
  * @param obj The `singly_linked_list` object to copy from.
@@ -85,30 +86,11 @@ singly_linked_list<A>::singly_linked_list(const std::vector<A> &values): linkedl
 }
 
 /**
- * @brief Move constructor for singly_linked_list.
- * @param obj The singly_linked_list object to move from.
- */
-// Causes RVO - Return Value Optimization causing - seg faults
-// template <typename A>
-// singly_linked_list<A>::singly_linked_list(singly_linked_list<A> &&obj) noexcept: linkedlist<A>::linkedlist()
-// {
-//     this->head = linkedlist<A>::gethead(obj);
-//     this->tail = linkedlist<A>::gettail(obj);
-//     this->length = obj.length;
-//     this->ref_count = obj.ref_count;
-
-//   *  obj.head = nullptr;
-//   *  obj.tail = nullptr;
-//     obj.length = new size_t(0);
-//     obj.ref_count = new size_t(1);
-// }
-
-/**
  * @brief Assigns the contents of another singly linked list to this list.
  *
- * This assignment operator first checks for self-assignment, then copies the 
- * elements and metadata (length and reference count) from the provided 
- * `singly_linked_list` object. It increments the reference count for shared 
+ * This assignment operator first checks for self-assignment, then copies the
+ * elements and metadata (length and reference count) from the provided
+ * `singly_linked_list` object. It increments the reference count for shared
  * ownership management.
  *
  * @param obj The `singly_linked_list` object to assign from.
@@ -144,7 +126,7 @@ singly_linked_list<A> &singly_linked_list<A>::operator=(const singly_linked_list
  * @return A reference to this singly_linked_list.
  */
 template <typename A>
-singly_linked_list<A>& singly_linked_list<A>::operator=(const std::initializer_list<A> &values) 
+singly_linked_list<A>& singly_linked_list<A>::operator=(const std::initializer_list<A> &values)
 {
     (*this->ref_count)--;
     if (*this->ref_count == 0)
@@ -170,7 +152,7 @@ singly_linked_list<A>& singly_linked_list<A>::operator=(const std::initializer_l
  */
 template <typename A>
 template <size_t N>
-singly_linked_list<A>& singly_linked_list<A>::operator=(const A (&array)[N]) 
+singly_linked_list<A>& singly_linked_list<A>::operator=(const A (&array)[N])
 {
     (*this->ref_count)--;
     if (*this->ref_count == 0)
@@ -195,7 +177,7 @@ singly_linked_list<A>& singly_linked_list<A>::operator=(const A (&array)[N])
  * @return A reference to this singly_linked_list.
  */
 template <typename A>
-singly_linked_list<A>& singly_linked_list<A>::operator=(const std::vector<A> &values) 
+singly_linked_list<A>& singly_linked_list<A>::operator=(const std::vector<A> &values)
 {
     (*this->ref_count)--;
     if (*this->ref_count == 0)
@@ -217,70 +199,29 @@ singly_linked_list<A>& singly_linked_list<A>::operator=(const std::vector<A> &va
 /**
  * @brief Assigns the contents of another singly linked list to this list.
  *
- * This assignment operator first checks for self-assignment, then copies the 
- * elements and metadata (length and reference count) from the provided 
- * `singly_linked_list` object. It increments the reference count for shared 
+ * This assignment operator first checks for self-assignment, then copies the
+ * elements and metadata (length and reference count) from the provided
+ * `singly_linked_list` object. It increments the reference count for shared
  * ownership management.
  *
  * @param obj The `singly_linked_list` object to assign from.
  * @return A reference to this `singly_linked_list`.
  */
 template <typename A>
-singly_linked_list<A> singly_linked_list<A>::operator=(singly_linked_list<A> &&obj)
+singly_linked_list<A> singly_linked_list<A>::operator=(singly_linked_list<A> &&obj) noexcept
 {
-    (*this->ref_count)--;
-    if (*this->ref_count == 0)
-    {
-        this->clear();
+    this->head = obj.head;
+    this->tail = obj.tail;
+    this->length = obj.length;
+    this->ref_count = obj.ref_count;
 
-        delete this->ref_count;
-        delete this->length;
-    }
-
-    *this->head = *this->tail = nullptr;
-    typename linkedlist<A>::node *ptr = *linkedlist<A>::gethead(obj);
-    while (ptr != nullptr)
-    {
-        this->append(ptr->value);
-        ptr = ptr->next;
-    }
-    
-    this->length = new size_t(*obj.length);
-    this->ref_count = new size_t(1);
+    obj.head = new typename linkedlist<A>::node*(nullptr);
+    obj.tail = new typename linkedlist<A>::node*(nullptr);
+    obj.length = new size_t(0);
+    obj.ref_count = new size_t(1);
 
     return *this;
 }
-
-/**
- * @brief Move assignment operator for transferring from another singly_linked_list.
- * @param obj The singly_linked_list object to move from.
- * @return A reference to this singly_linked_list.
- */
-// Causes RVO problems
-// template <typename A>
-// singly_linked_list<A> &singly_linked_list<A>::operator=(singly_linked_list<A> &&obj) noexcept
-// {
-//     (*this->ref_count)--;
-//     if (*this->ref_count == 0)
-//     {
-//         this->clear();
-
-//         delete this->length;
-//         delete this->ref_count;
-//     }
-
-//     this->head = linkedlist<A>::gethead(obj);
-//     this->tail = linkedlist<A>::gettail(obj);
-//     this->length = obj.length;
-//     this->ref_count = obj.ref_count;
-
-//     obj.head = nullptr;
-//     obj.tail = nullptr;
-//     obj.length = nullptr;
-//     obj.ref_count = nullptr;
-
-//     return *this;
-// }
 
 /**
  * @brief Prepend a value to the list.
@@ -376,7 +317,7 @@ template <typename A>
 void singly_linked_list<A>::insert(const int64_t &index, const linkedlist<A> &obj)
 {
     int64_t curr_index = index;
-    typename linkedlist<A>::node *ptr = *linkedlist<A>::gethead(obj);
+    typename linkedlist<A>::node *ptr = *(linkedlist<A>::gethead(obj));
     while (ptr != nullptr)
     {
         this->insert(curr_index++, ptr->value);
@@ -733,7 +674,8 @@ bool singly_linked_list<A>::contains(const A &value) const
 /**
  * @brief Finds the index of the first occurrence of a specific value in the singly linked list.
  *
- * This method returns the index of the first node containing the specified value. If the value is not found, it returns the size of the list.
+ * This method returns the index of the first node containing the specified value.
+ * If the value is not found, it returns the size of the list.
  *
  * @param value The value to search for.
  * @return The index of the value in the list if the value is found in the list.
@@ -1076,7 +1018,7 @@ bool singly_linked_list<A>::operator<=(const linkedlist<A> &obj) const
  * @return true if the current list is equal to the provided list, otherwise false.
  */
 template <typename A>
-bool singly_linked_list<A>::operator==(const linkedlist<A> &obj) const 
+bool singly_linked_list<A>::operator==(const linkedlist<A> &obj) const
 {
     typename linkedlist<A>::node *ptr1 = *this->head, *ptr2 = *linkedlist<A>::gethead(obj);
     while (ptr1 != nullptr && ptr2 != nullptr)
@@ -1113,8 +1055,7 @@ bool singly_linked_list<A>::operator!=(const linkedlist<A> &obj) const
  * singly_linked_list class to be implicitly converted 
  * to a std::array of type A and size N.
  *
- * @throw INDEX_ERROR If N is less than the number of elements 
- *                           in the linked list.
+ * @throw INDEX_ERROR If N is less than the number of elements in the linked list.
  *
  * @return A std::array containing the elements of the singly linked list.
  */
@@ -1166,7 +1107,7 @@ singly_linked_list<A>::operator A *()
 /**
  * @brief Converts the singly linked list to a vector.
  *
- * This conversion operator creates a vector containing 
+ * This conversion operator creates a vector containing
  * the elements of the singly linked list.
  *
  * @return A vector containing the elements of the linked list.
@@ -1267,8 +1208,8 @@ std::ostream &operator<<(std::ostream &out, singly_linked_list<A> &obj)
         return out;
     }
 
-    typename linkedlist<A>::node *ptr = *linkedlist<A>::gethead(obj);
-    while (ptr != *linkedlist<A>::gettail(obj))
+    typename linkedlist<A>::node *ptr = *linkedlist<A>::gethead(obj), *tail = *linkedlist<A>::gettail(obj);
+    while (ptr != tail)
     {
         out << ptr->value << ", ";
         ptr = ptr->next;

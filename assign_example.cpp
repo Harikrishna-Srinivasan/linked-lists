@@ -11,11 +11,11 @@
  * including integers, characters, and custom classes. It showcases the use of move and assignment operators.
  * 
  * @author Harikrishna Srinivasan
- * @date [Current Date]
- * @version 1.0
+ * @date 05 July 2025
+ * @version 0.9
  */
 
-int main() 
+int main()
 {
     // Default Constructor: Initializes with default values
     singly_linked_list<int> list1;

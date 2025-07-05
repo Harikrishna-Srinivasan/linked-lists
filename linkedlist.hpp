@@ -30,9 +30,9 @@ class linkedlist
             private:
                 linkedlist<A>::node *ptr;
 
-                iterator(linkedlist<A>::node *ptr);
             public:
                 iterator();
+                iterator(linkedlist<A>::node *ptr);
 
                 constexpr iterator &operator++();
                 constexpr iterator &operator++(int);
@@ -48,9 +48,9 @@ class linkedlist
             private:
                 const linkedlist<A>::node *ptr;
 
-                const_iterator(linkedlist<A>::node *ptr);
             public:
                 const_iterator();
+                const_iterator(linkedlist<A>::node *ptr);
 
                 constexpr const const_iterator &operator++();
                 constexpr const const_iterator &operator++(int);
