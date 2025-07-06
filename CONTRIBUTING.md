@@ -86,7 +86,5 @@ Please follow the style guide outlined in the `STYLE_GUIDE.md` file. Consistent 
 - [GitHub Documentation on Pull Requests](https://docs.github.com/en/pull-requests)
 - [GitHub Documentation on Issues](https://docs.github.com/en/issues)
 
-Thank you for contributing to [Linked Lists]! Your help makes this project better for everyone.
+Thank you for your interest in contributing to [Linked Lists](../../)! Your help makes this project better for everyone.
 ---
-
-**Note:** Customize the URLs, branch names, and any specific instructions according to your project’s needs. This template provides a structured way for contributors to understand how to engage with your project effectively.
